@@ -1,0 +1,7 @@
+{
+  "spellright.language": ["en"],
+  "spellright.documentTypes": ["markdown"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.format.enable": true
+}
