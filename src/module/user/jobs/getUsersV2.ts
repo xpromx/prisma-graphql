@@ -3,11 +3,6 @@ import { db } from "../../../utils/database";
 import { UserFilters } from "../input/UserFilters";
 import { PrismaQueryBuilder } from "../../../utils/PrismaQueryBuilder";
 
-interface Conditions extends Prisma.UserFindManyArgs {
-  where: NonNullable<Prisma.UserFindManyArgs["where"]>;
-  include: Prisma.UserFindManyArgs["include"];
-}
-
 export const getUsers = (first: number, filters: UserFilters) => {
   const query = PrismaQueryBuilder<Prisma.UserFindManyArgs>();
   if (filters.email) {
