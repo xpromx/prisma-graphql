@@ -53,7 +53,7 @@ const filterHasPost = (query: Query): Query => {
   };
 };
 
-export const getUsers = (first: number, filters: UserFilters) => {
+export const getUsers = (first = 50, filters: UserFilters = {}) => {
   let query: Query = {};
 
   if (filters.email) {

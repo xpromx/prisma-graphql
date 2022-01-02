@@ -3,7 +3,7 @@ import { db } from "../../../utils/database";
 import { UserFilters } from "../input/UserFilters";
 import { QueryBuilder } from "../../../utils/QueryBuilder";
 
-export const getUsers = (first: number, filters: UserFilters) => {
+export const getUsers = (first = 50, filters: UserFilters = {}) => {
   const query = QueryBuilder();
   query.select("User.*");
   query.from("User");
