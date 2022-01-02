@@ -1,24 +1,25 @@
+import "dotenv-flow/config";
 import "reflect-metadata";
-import * as tq from "type-graphql";
-import { ApolloServer } from "apollo-server";
-import { DateTimeResolver } from "graphql-scalars";
-import { context } from "./context";
-import { GraphQLScalarType } from "graphql";
-import resolvers from "./resolvers";
+import { ApolloServer } from "apollo-server-express";
+import { createSchema } from "./schema";
+import express from "express";
 
-const app = async () => {
-  const schema = await tq.buildSchema({
-    resolvers,
-    scalarsMap: [{ type: GraphQLScalarType, scalar: DateTimeResolver }],
-  });
+const app = express();
 
-  new ApolloServer({ schema, context: context }).listen({ port: 4000 }, () =>
-    console.log(`
+const apolloServer = new ApolloServer({
+  schema: createSchema(),
+});
+
+apolloServer.applyMiddleware({
+  app,
+  cors: false,
+});
+
+const port = process.env.PORT || 4000;
+app.listen(port, () => {
+  console.log(`
     ---------------------------------------------------------
     🚀 Server ready at: http://localhost:4000
     ---------------------------------------------------------
-    `)
-  );
-};
-
-app();
+    `);
+});
